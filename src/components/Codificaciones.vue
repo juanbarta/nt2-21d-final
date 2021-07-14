@@ -43,13 +43,6 @@
       minus: function(texto) {
         return texto.toLowerCase();
       },
-      codificado: function (texto) {
-      //const result = texto.toLowerCase().split("a").join("u").split("e").join("o").split("o").join("e").split("u").join("a");
-      const result = texto.toLowerCase().replace('a','u').replace('e','o').replace('o','e').replace('u','a');
-
-      return result;
-      },
-
       codificadoUA: function (texto){
       return texto.toLowerCase().split('').map((char) => char == 'a' ? char = 'u' : char == 'u' ? char = 'a' : char = char.toString()).join('')
       },
