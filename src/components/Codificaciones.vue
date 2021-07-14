@@ -6,7 +6,7 @@
         <input type="text" v-model="texto">
         <hr>
         <h5> cantidad: {{ cantidadCaracteres}}</h5>
-        <h5>{{ texto | replace("a","e")}} (codificado)</h5>
+        <h5>{{ texto | codificadoUA | codificadoOE }} (codificado)</h5>
         <h5>{{ texto | mayus}} (Mayúscula)</h5>
         <h5>{{ texto | minus}} (Minúscula)</h5>
         <h5>{{ texto | mayusMinus}} (Mayúscula/Minúscula)</h5>
@@ -43,12 +43,19 @@
       minus: function(texto) {
         return texto.toLowerCase();
       },
-      codificado: function(texto) {
-        return texto.replace('o','e')
-      },
-      replace: function (texto) {
-      const result = texto.toLowerCase().split("o").join("e").split("u").join("a");
+      codificado: function (texto) {
+      //const result = texto.toLowerCase().split("a").join("u").split("e").join("o").split("o").join("e").split("u").join("a");
+      const result = texto.toLowerCase().replace('a','u').replace('e','o').replace('o','e').replace('u','a');
+
       return result;
+      },
+
+      codificadoUA: function (texto){
+      return texto.toLowerCase().split('').map((char) => char == 'a' ? char = 'u' : char == 'u' ? char = 'a' : char = char.toString()).join('')
+      },
+      
+      codificadoOE: function (texto){
+      return texto.toLowerCase().split('').map((char) => char == 'e' ? char = 'o' : char == 'o' ? char = 'e' : char = char.toString()).join('')
       }
     },
     methods: {
